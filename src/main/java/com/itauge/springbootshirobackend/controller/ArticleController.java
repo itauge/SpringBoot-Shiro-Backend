@@ -1,5 +1,6 @@
 package com.itauge.springbootshirobackend.controller;
 
+import com.itauge.springbootshirobackend.config.annotation.RequiresPermissions;
 import com.itauge.springbootshirobackend.entity.Article;
 import com.itauge.springbootshirobackend.service.ArticleService;
 import com.itauge.springbootshirobackend.util.CommonUtil;
@@ -20,6 +21,7 @@ public class ArticleController {
      * @param request
      * @return
      */
+    @RequiresPermissions("article:list")
     @GetMapping("/listArticle")
     public ResultVO listArticle(HttpServletRequest request){
        return articleService.listArticle(CommonUtil.request2Json(request));
@@ -30,6 +32,7 @@ public class ArticleController {
      * @param article
      * @return
      */
+    @RequiresPermissions("article:add")
     @PostMapping("/addArticle")
     public ResultVO addArticle(@RequestBody Article article){
         return articleService.addArticle(article);
@@ -40,6 +43,7 @@ public class ArticleController {
      * @param article
      * @return
      */
+    @RequiresPermissions("article:update")
     @PostMapping("/updateArticle")
     public ResultVO updateArticle(@RequestBody Article article){
         return articleService.updateArticle(article);
